@@ -5,6 +5,12 @@ function! vebugger#gdb#searchAndAttach(binaryFile)
 	endif
 endfunction
 
+function! vebugger#gdb#connectRemote(binaryFile,con)
+	let l:debugger=vebugger#gdb#start(a:binaryFile,{'pid':0})
+	call l:debugger.writeLine('target remote '.a:con)
+	return l:debugger
+endfunction
+
 function! vebugger#gdb#start(binaryFile,args)
 	let l:debugger=vebugger#std#startDebugger(shellescape(vebugger#util#getToolFullPath('gdb',get(a:args,'version'),'gdb'))
 				\.' -i mi --silent '.fnameescape(a:binaryFile))
@@ -16,7 +22,9 @@ function! vebugger#gdb#start(binaryFile,args)
 	call l:debugger.writeLine("define hook-stop\nwhere\nend")
 
 	if get(a:args,'pid') "Attach to process
-		call l:debugger.writeLine('attach '.string(a:args.pid))
+		if get(a:args,'pid') != 0
+			call l:debugger.writeLine('attach '.string(a:args.pid))
+		endif
 	else
 		call l:debugger.writeLine('set args '.vebugger#util#commandLineArgsForProgram(a:args).' 1>&2')
 		if !has('win32')
