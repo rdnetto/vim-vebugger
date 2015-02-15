@@ -51,9 +51,9 @@ The features that don't work under windows are:
 REQUIREMENTS
 ============
 
-Vebugger requires the vimproc plugin, obtainable from:
-https://github.com/Shougo/vimproc.vim.  Notice that vimproc needs to be built -
-there are instructions in the GitHub page.
+Vebugger requires the [vimproc](https://github.com/Shougo/vimproc.vim) and
+[repeat.vim](https://github.com/tpope/vim-repeat) plugins. Notice that vimproc
+needs to be built - there are instructions in the GitHub page.
 
 In order for Vebugger to use a debugger, that debugger must be installed and
 it's executable must be either be in the PATH or set with a global variable

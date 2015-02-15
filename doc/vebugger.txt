@@ -227,7 +227,7 @@ source file paths.
 USING THE DEBUGGERS                        *vebugger-usage* *vebugger-commands*
 
 Once you have launched a debugger, you can use the following commands to
-interact with it:
+interact with it. They may be repeated using '.'
 
 
 CONTROL THE EXECUTION OF THE PROGRAM              *vebugger-execution-control*
