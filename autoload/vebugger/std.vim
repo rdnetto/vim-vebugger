@@ -169,7 +169,10 @@ function! s:standardThinkHandlers.moveToCurrentLine(readResult,debugger) dict
 			endif
 			let a:debugger.state.std.location=deepcopy(a:readResult.std.location)
 			if !bufexists(a:readResult.std.location.file)
-				exe 'new '.(a:readResult.std.location.file)
+				if !exists('g:vebugger_edit_cmd')
+					let g:vebugger_edit_cmd='new'
+				end
+				exe g:vebugger_edit_cmd.' '.(a:readResult.std.location.file)
 			endif
 			call vebugger#std#updateMarksForFile(a:debugger.state,a:readResult.std.location.file)
 			exe 'sign jump 1 file='.fnameescape(fnamemodify(a:readResult.std.location.file,':p'))
